@@ -12,8 +12,9 @@
     </div>
     <div class="select-pexeso text-center" v-if="pageSelected === 'select-pexeso'">
       <h1>Select Pexeso</h1><hr>
-      <div class="pexeso-show" v-for="(pexeso, i) in pexesoDecks" :key="i">
-        <div class="each-pexeso col-sm-4" :class="{'pexeso-active': activeDeck === pexesoDecks[i]}"
+      <div class="pexeso-show">
+        <div class="each-pexeso" v-for="(pexeso, i) in pexesoDecks" :key="i"
+        :class="{'pexeso-active': activeDeck === pexesoDecks[i]}"
          @click="selectPexeso(i)">
           <h3 class="pexeso-header">{{ pexeso.name }}</h3><br>
           <img class="pexeso-main img-fluid" :src="getPexesoImage(i)" alt="pexeso">
@@ -30,13 +31,17 @@
       </div>
       <div class="game-board">
         <div class="card" v-for="(card, i) in activeDeck.cards" :key="i">
-          <img v-if="activeCard.card1 === i"
+          <img v-if="activeCard.card1 === i" 
+          :class="{'card-img-sm': activeDeck.numberOfCards > 40, 'card-img-lg': activeDeck.numberOfCards <= 40}"
           :src="getFrontImage(i)" class="img-fluid">
-          <img v-else-if="activeCard.card2 === i"
+          <img v-else-if="activeCard.card2 === i" 
+          :class="{'card-img-sm': activeDeck.numberOfCards > 40, 'card-img-lg': activeDeck.numberOfCards <=40}"
           :src="getFrontImage(i)" class="img-fluid">
-          <img v-else-if="discardedCards.includes(i)"
+          <img v-else-if="discardedCards.includes(i)" 
+          :class="{'card-img-sm': activeDeck.numberOfCards > 40, 'card-img-lg': activeDeck.numberOfCards <=40}"
             :src="getEndImage()" class="img-fluid">
-          <img v-else
+          <img v-else 
+          :class="{'card-img-sm': activeDeck.numberOfCards > 40, 'card-img-lg': activeDeck.numberOfCards <=40}"
           :src="getBackImage()" @click="flipCard(i)" class="img-fluid">
         </div>
       </div>
@@ -163,13 +168,21 @@ export default {
 </script>
 
 <style>
-img {
+.card-img-sm {
   width: 90px;
   height: 90px;
+}
+.card-img-lg {
+  width: 130px;
+  height: 130px;
 }
 .pexeso-main {
   width: 300px;
   height: 300px;
+}
+.pexeso-show {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
 }
 .each-pexeso {
   padding: 20px;

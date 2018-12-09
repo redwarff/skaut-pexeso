@@ -1,6 +1,7 @@
 /* img folder by měla obsahovat složku s názvem pexesa (= pathName). Složka musí obsahovat obrázky ve formátu .png
 číslované od 1 do (numberOfCards / 2), tudíž každou kartu jen jednou. Dále by měla obsahovat titulní obrázek
-s názvem main.png. Počet karet není dán, je možné jakékoliv sudé číslo. */
+s názvem main.png. Obrázky by měly být přibližně ve tvaru čtverce, na velikosti ale nezáleží. 
+Počet karet není dán, je možné jakékoliv sudé číslo. */
 
 class Pexeso {
 
@@ -35,9 +36,10 @@ class Pexeso {
 }
 
 const harryPotterPexeso = new Pexeso('Harry Potter', 'harryPotter', 56);
+const lordOfTheRings = new Pexeso('Lord of the Rings', 'lotr', 38)
 
 // Každé nové pexeso přidej do pole pexesoDecks.
-const pexesoDecks = [harryPotterPexeso]
+const pexesoDecks = [harryPotterPexeso, lordOfTheRings]
 
 
 function initiatePexeso(pexesoDeck) {
