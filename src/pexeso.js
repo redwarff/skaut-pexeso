@@ -1,3 +1,7 @@
+/* img folder by měla obsahovat složku s názvem pexesa (= pathName). Složka musí obsahovat obrázky ve formátu .png
+číslované od 1 do (numberOfCards / 2), tudíž každou kartu jen jednou. Dále by měla obsahovat titulní obrázek
+s názvem main.png. Počet karet není dán, je možné jakékoliv sudé číslo. */
+
 class Pexeso {
 
     constructor(name, pathName, numberOfCards) {
@@ -32,8 +36,18 @@ class Pexeso {
 
 const harryPotterPexeso = new Pexeso('Harry Potter', 'harryPotter', 56);
 
-harryPotterPexeso.createCards();
-harryPotterPexeso.makePairs();
-harryPotterPexeso.shuffleDeck();
+// Každé nové pexeso přidej do pole pexesoDecks.
+const pexesoDecks = [harryPotterPexeso]
 
-export default harryPotterPexeso;
+
+function initiatePexeso(pexesoDeck) {
+    pexesoDeck.forEach(pexeso => {
+        pexeso.createCards();
+        pexeso.makePairs();
+        pexeso.shuffleDeck();
+    })
+}
+
+document.addEventListener('DOMContentLoaded', initiatePexeso(pexesoDecks));
+
+export default pexesoDecks;

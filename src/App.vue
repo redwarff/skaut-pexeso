@@ -50,14 +50,14 @@
 </template>
 
 <script>
-import harryPotterPexeso from './pexeso'
+import pexesoDecks from './pexeso'
 
 export default {
   name: 'app',
   data() {
     return {
       pageSelected: 'menu',
-      pexesoDecks: [harryPotterPexeso],
+      pexesoDecks: pexesoDecks,
       activeDeck: undefined,
       isPlayer1Active: true,
       wasPlayerSuccessful: false,
