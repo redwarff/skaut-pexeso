@@ -12,7 +12,7 @@
     <div class="game" v-if="pageSelected === 'game'">
       <div class="score text-center">
         <h3 :class="{'active':isPlayer1Active, 'passive':!isPlayer1Active}"> {{ player1.name }}</h3>
-        <h3>{{ player1.points }} | {{ player2.points }}</h3>
+        <h3>{{ player1.score }} | {{ player2.score }}</h3>
         <h3 :class="{'active':!isPlayer1Active, 'passive':isPlayer1Active}"> {{ player2.name }} </h3>
       </div>
       <div class="game-board">
@@ -28,7 +28,11 @@
         </div>
       </div>
     </div>
-    <div class="result" v-if="pageSelected === 'result'"></div>
+    <div class="result text-center" v-if="pageSelected === 'result'">
+      <h1>Result</h1><hr>
+      <h4>{{ resultMessage }}</h4><br><br>
+      <button class="btn btn-lg btn-danger" @click="newGame()">Start a new game</button>
+    </div>
   </div>
 </template>
 
@@ -45,23 +49,28 @@ export default {
       pageSelected: 'menu',
       activeDeck: harryPotterPexeso,
       isPlayer1Active: true,
+      wasPlayerSuccessful: false,
       activeCard: {
         card1: undefined,
         card2: undefined,
       },
       player1: {
         name: undefined,
-        points: 0,
+        score: 0,
       },
       player2: {
         name: undefined,
-        points: 0,
+        score: 0,
       },
       loading: false,
       discardedCards: [],
+      resultMessage: '',
     }
   },
   methods: {
+    newGame() {
+      this.selectPage('menu');
+    },
     selectPage(page) {
       this.pageSelected = page;
     },
@@ -88,29 +97,49 @@ export default {
       }
     },
     evaluate() {
+      this.loading = true;
+      setTimeout(() => {
+        this.countScore();
+        this.reset();
+      }, 1500);
+    },
+    countScore() {
+      this.wasPlayerSuccessful = false;
       if (this.activeDeck.cards[this.activeCard.card1].cardName === this.activeDeck.cards[this.activeCard.card2].cardName) {
         if (this.isPlayer1Active) {
-          this.player1.points += 1;
+          this.player1.score += 1;
+          this.wasPlayerSuccessful = true;
         }
         else {
-          this.player2.points += 1;
+          this.player2.score += 1;
+          this.wasPlayerSuccessful = true;
         }
         this.discardedCards.push(this.activeCard.card1);
         this.discardedCards.push(this.activeCard.card2);
+        if (this.discardedCards.length === this.activeDeck.cards.length) {
+          return this.result();
+        }
       }
-      this.loading = true;
-      setTimeout(() => {
-        this.reset();
-      }, 2000);
     },
     switchPlayers() {
       this.isPlayer1Active = !this.isPlayer1Active;
     },
     reset() {
-      this.switchPlayers();
       this.activeCard.card1 = undefined;
       this.activeCard.card2 = undefined;
       this.loading = false;
+      if (!this.wasPlayerSuccessful) {
+        this.switchPlayers()
+      }
+    },
+    result() {
+      if (this.player1.score > this.player2.score) {
+        this.resultMessage = `${this.player1.name} won with a total of ${this.player1.score} points.`;
+      }
+      else {
+        this.resultMessage = `${this.player2.name} won with a total of ${this.player2.score} points.`;
+      }
+      this.selectPage('result');
     }
   },
 }
