@@ -69,7 +69,7 @@ export default {
   },
   methods: {
     newGame() {
-      this.selectPage('menu');
+      location.reload();
     },
     selectPage(page) {
       this.pageSelected = page;
