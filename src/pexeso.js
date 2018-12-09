@@ -1,9 +1,9 @@
 class Pexeso {
 
-    constructor(name, numberOfCards, numberOfCols) {
+    constructor(name, pathName, numberOfCards) {
         this.name = name;
+        this.pathName = pathName;
         this.numberOfCards = numberOfCards;
-        this.numberOfCols = numberOfCols;
         this.cards = [];
     }
 
@@ -30,7 +30,7 @@ class Pexeso {
     }
 }
 
-const harryPotterPexeso = new Pexeso('harryPotter', 56, 8);
+const harryPotterPexeso = new Pexeso('Harry Potter', 'harryPotter', 56);
 
 harryPotterPexeso.createCards();
 harryPotterPexeso.makePairs();

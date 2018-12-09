@@ -1,12 +1,25 @@
 <template>
-  <div id="app container-fluid">
+  <div id="app" class="container-fluid">
     <div class="menu text-center" v-if="pageSelected === 'menu'">
       <h1>Choose your name</h1><hr>
       <h2>Player 1:</h2>
       <input type="text" v-model="player1.name" placeholder="Write your name here...">
       <h2>Player 2:</h2>
-      <input type="text" v-model="player2.name" placeholder="Write your name here..."><br><br>
+      <input type="text" v-model="player2.name" placeholder="Write your name here..."
+      @keydown.enter="selectPage('select-pexeso')"><br><br><br>
       <button class="btn btn-lg btn-danger" :disabled="player1.name === undefined || player2.name === undefined"
+        @click="selectPage('select-pexeso')">Next screen</button>
+    </div>
+    <div class="select-pexeso text-center" v-if="pageSelected === 'select-pexeso'">
+      <h1>Select Pexeso</h1><hr>
+      <div class="pexeso-show" v-for="(pexeso, i) in pexesoDecks" :key="i">
+        <div class="each-pexeso col-sm-4" :class="{'pexeso-active': activeDeck === pexesoDecks[i]}"
+         @click="selectPexeso(i)">
+          <h3 class="pexeso-header">{{ pexeso.name }}</h3><br>
+          <img class="pexeso-main img-fluid" :src="getPexesoImage(i)" alt="pexeso">
+        </div>
+      </div>
+      <button class="btn btn-lg btn-danger margin-top-100" :disabled="activeDeck === undefined"
         @click="selectPage('game')">Start Game</button>
     </div>
     <div class="game" v-if="pageSelected === 'game'">
@@ -41,13 +54,11 @@ import harryPotterPexeso from './pexeso'
 
 export default {
   name: 'app',
-  components: {
-    
-  },
   data() {
     return {
       pageSelected: 'menu',
-      activeDeck: harryPotterPexeso,
+      pexesoDecks: [harryPotterPexeso],
+      activeDeck: undefined,
       isPlayer1Active: true,
       wasPlayerSuccessful: false,
       activeCard: {
@@ -74,14 +85,20 @@ export default {
     selectPage(page) {
       this.pageSelected = page;
     },
+    selectPexeso(i) {
+      this.activeDeck = this.pexesoDecks[i];
+    },
     getBackImage() {
       return require('../src/assets/img/back.png');
     },
     getFrontImage(i) {
-      return require('../src/assets/img/' + this.activeDeck.name + '/' + this.activeDeck.cards[i].cardName + '.png');
+      return require('../src/assets/img/' + this.activeDeck.pathName + '/' + this.activeDeck.cards[i].cardName + '.png');
     },
     getEndImage(i) {
       return require('../src/assets/img/end.png')
+    },
+    getPexesoImage(i) {
+      return require('../src/assets/img/' + this.pexesoDecks[i].pathName + '/main.png');
     },
     flipCard(index) {
       if (this.loading) return;
@@ -150,6 +167,21 @@ img {
   width: 90px;
   height: 90px;
 }
+.pexeso-main {
+  width: 300px;
+  height: 300px;
+}
+.each-pexeso {
+  padding: 20px;
+  border-radius: 20px;
+}
+.each-pexeso:hover {
+  background-color: rgb(192, 192, 192);
+  cursor: pointer;
+}
+.pexeso-active {
+  background-color: rgb(192, 192, 192);
+}
 .game-board {
   display: grid;
   grid-template-columns: repeat(8, 1fr);
@@ -178,6 +210,13 @@ h2 {
 h1 {
   margin-top: 20px;
   margin-bottom: 20px;
+}
+.margin-top-100 {
+  margin-top: 100px;
+}
+.pexeso-header {
+  display: block;
+  margin-bottom: 0px;
 }
 
 @media (max-width: 800px) {
