@@ -20,7 +20,7 @@
           <img class="pexeso-main img-fluid" :src="getPexesoImage(i)" alt="pexeso">
         </div>
       </div>
-      <button class="btn btn-lg btn-danger margin-top-100" :disabled="activeDeck === undefined"
+      <button class="btn btn-lg btn-danger margin-top-60" :disabled="activeDeck === undefined"
         @click="selectPage('game')">Start Game</button>
     </div>
     <div class="game" v-if="pageSelected === 'game'">
@@ -224,22 +224,51 @@ h1 {
   margin-top: 20px;
   margin-bottom: 20px;
 }
-.margin-top-100 {
-  margin-top: 100px;
+.margin-top-60 {
+  margin-top: 60px;
 }
 .pexeso-header {
   display: block;
   margin-bottom: 0px;
 }
 
+@media (max-width: 1000px) {
+  .pexeso-show {
+    grid-template-columns: 1fr 1fr;
+  }
+}
 @media (max-width: 800px) {
   .game-board {
     grid-template-columns: repeat(6, 1fr);
+  }
+}
+@media (max-width: 700px) {
+  .pexeso-show {
+    grid-template-columns: 1fr;
   }
 }
 @media (max-width: 600px) {
   .game-board {
     grid-template-columns: repeat(4, 1fr);
   }
+  .card-img-lg {
+    width: 70px;
+    height: 70px;
+  }
+  .card-img-sm {
+    width: 70px;
+    height: 70px;
+  }
 }
+@media (max-width: 350px) {
+  .card-img-lg {
+    width: 60px;
+    height: 60px;
+  }
+  .card-img-sm {
+    width: 60px;
+    height: 60px;
+  }
+}
+
 </style>
