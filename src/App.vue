@@ -33,16 +33,16 @@
         <div class="card" v-for="(card, i) in activeDeck.cards" :key="i">
           <img v-if="activeCard.card1 === i" 
           :class="{'card-img-sm': activeDeck.numberOfCards > 40, 'card-img-lg': activeDeck.numberOfCards <= 40}"
-          :src="getFrontImage(i)" class="img-fluid">
+          :src="getCardImage(i)" class="img-fluid">
           <img v-else-if="activeCard.card2 === i" 
           :class="{'card-img-sm': activeDeck.numberOfCards > 40, 'card-img-lg': activeDeck.numberOfCards <=40}"
-          :src="getFrontImage(i)" class="img-fluid">
+          :src="getCardImage(i)" class="img-fluid">
           <img v-else-if="discardedCards.includes(i)" 
           :class="{'card-img-sm': activeDeck.numberOfCards > 40, 'card-img-lg': activeDeck.numberOfCards <=40}"
-            :src="getEndImage()" class="img-fluid">
+            src="../src/assets/img/end.png" class="img-fluid">
           <img v-else 
           :class="{'card-img-sm': activeDeck.numberOfCards > 40, 'card-img-lg': activeDeck.numberOfCards <=40}"
-          :src="getBackImage()" @click="flipCard(i)" class="img-fluid">
+            src="../src/assets/img/back.png" @click="flipCard(i)" class="img-fluid">
         </div>
       </div>
     </div>
@@ -93,14 +93,8 @@ export default {
     selectPexeso(i) {
       this.activeDeck = this.pexesoDecks[i];
     },
-    getBackImage() {
-      return require('../src/assets/img/back.png');
-    },
-    getFrontImage(i) {
+    getCardImage(i) {
       return require('../src/assets/img/' + this.activeDeck.pathName + '/' + this.activeDeck.cards[i].cardName + '.png');
-    },
-    getEndImage(i) {
-      return require('../src/assets/img/end.png')
     },
     getPexesoImage(i) {
       return require('../src/assets/img/' + this.pexesoDecks[i].pathName + '/main.png');
