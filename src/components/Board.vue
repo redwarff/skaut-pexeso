@@ -54,7 +54,7 @@ export default {
         if (this.activeCard.card2===this.activeCard.card1) {
           return;
         }
-        this.evaluate()
+        this.evaluate();
       }
     },
     evaluate() {
@@ -90,7 +90,7 @@ export default {
       this.activeCard.card2 = undefined;
       this.loading = false;
       if (!this.wasPlayerSuccessful) {
-        this.switchPlayers()
+        this.switchPlayers();
       }
     },
   },
