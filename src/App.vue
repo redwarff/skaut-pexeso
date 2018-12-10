@@ -145,6 +145,10 @@ h1 {
     width: 60px;
     height: 60px;
   }
+  .pexeso-main {
+  width: 280px;
+  height: 280px;
+}
 }
 
 </style>
