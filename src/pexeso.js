@@ -30,17 +30,17 @@ class Pexeso {
     shuffleDeck() {
         for (let i = this.cards.length - 1; i > 0; i--) {
             const j = Math.floor(Math.random() * (i + 1));
-            [this.cards[i], this.cards[j]] = [this.cards[j], this.cards[i]]
+            [this.cards[i], this.cards[j]] = [this.cards[j], this.cards[i]];
         }
     }
 }
 
 const harryPotterPexeso = new Pexeso('Harry Potter', 'harryPotter', 56);
 const lordOfTheRings = new Pexeso('Lord of the Rings', 'lotr', 38);
-const strangerThings = new Pexeso('Stranger Things', 'strangerThings', 40)
+const strangerThings = new Pexeso('Stranger Things', 'strangerThings', 40);
 
 // Každé nové pexeso přidej do pole pexesoDecks.
-const pexesoDecks = [harryPotterPexeso, lordOfTheRings, strangerThings]
+const pexesoDecks = [harryPotterPexeso, lordOfTheRings, strangerThings];
 
 
 function initiatePexeso(pexesoDeck) {
