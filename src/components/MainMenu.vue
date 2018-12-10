@@ -19,9 +19,3 @@ export default {
 
 </script>
 
-<style>
-  input {
-    padding-left: 3px;
-  }
-</style>
-
