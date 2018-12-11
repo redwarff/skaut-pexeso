@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="select-pexeso text-center" v-if="pageSelected === 'select-pexeso'">
+    <div class="game text-center" v-if="pageSelected === 'game'">
       <h1>Select Pexeso</h1><hr>
       <div class="pexeso-show">
         <div class="each-pexeso" v-for="(pexeso, i) in pexesoDecks" :key="i"
@@ -11,7 +11,7 @@
         </div>
       </div>
       <button class="btn btn-lg btn-danger margin-top-60" :disabled="activeDeck === undefined"
-        @click="selectPage('game')">Start Game</button>
+        @click="selectPage('board')">Start Game</button>
     </div>
     <board :selectPage="selectPage" :pageSelected="pageSelected" :pexesoDecks="pexesoDecks"
       :activeDeck="activeDeck" :player1="player1" :player2="player2"></board>

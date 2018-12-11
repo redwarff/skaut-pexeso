@@ -1,5 +1,5 @@
 <template>
-  <div class="game" v-if="pageSelected === 'game'">
+  <div class="game" v-if="pageSelected === 'board'">
     <div class="score text-center">
       <h3 :class="{'active':isPlayer1Active, 'passive':!isPlayer1Active}"> {{ player1.name }}</h3>
       <h3>{{ player1.score }} | {{ player2.score }}</h3>
