@@ -7,18 +7,8 @@
     </div>
     <div class="game-board">
       <div class="card" v-for="(card, i) in activeDeck.cards" :key="i">
-        <img v-if="activeCard.card1 === i" 
-        :class="{'card-img-sm': activeDeck.numberOfCards > 40, 'card-img-lg': activeDeck.numberOfCards <= 40}"
-        :src="getCardImage(i)" class="img-fluid">
-        <img v-else-if="activeCard.card2 === i" 
-        :class="{'card-img-sm': activeDeck.numberOfCards > 40, 'card-img-lg': activeDeck.numberOfCards <=40}"
-        :src="getCardImage(i)" class="img-fluid">
-        <img v-else-if="discardedCards.includes(i)" 
-        :class="{'card-img-sm': activeDeck.numberOfCards > 40, 'card-img-lg': activeDeck.numberOfCards <=40}"
-          src="../assets/img/end.png" class="img-fluid">
-        <img v-else 
-        :class="{'card-img-sm': activeDeck.numberOfCards > 40, 'card-img-lg': activeDeck.numberOfCards <=40}"
-          src="../assets/img/back.png" @click="flipCard(i)" class="img-fluid">
+        <img :class="{'card-img-sm': activeDeck.numberOfCards > 40, 'card-img-lg': activeDeck.numberOfCards <= 40}"
+        :src="imgSrc(i)" @click="onImgClick(i)" class="img-fluid">
       </div>
     </div>
   </div>
@@ -41,8 +31,16 @@ export default {
     }
   },
   methods: {
-    getCardImage(i) {
-      return require('../assets/img/' + this.activeDeck.pathName + '/' + this.activeDeck.cards[i].cardName + '.png');
+    imgSrc(i) {
+      if (this.activeCard.card1 === i || this.activeCard.card2 === i) {
+        return require('../assets/img/' + this.activeDeck.pathName + '/' + this.activeDeck.cards[i].cardName + '.png');
+      }
+      else if (this.discardedCards.includes(i)) return require('../assets/img/end.png');
+      else return require('../assets/img/back.png');
+    },
+    onImgClick(i) {
+      if (this.activeCard.card1 === i || this.activeCard.card2 === i || this.discardedCards.includes(i)) return;
+      this.flipCard(i)
     },
     flipCard(index) {
       if (this.loading) return;
