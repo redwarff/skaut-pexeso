@@ -38,9 +38,10 @@ class Pexeso {
 const harryPotterPexeso = new Pexeso('Harry Potter', 'harryPotter', 56);
 const lordOfTheRings = new Pexeso('Lord of the Rings', 'lotr', 38);
 const strangerThings = new Pexeso('Stranger Things', 'strangerThings', 40);
+const skaut = new Pexeso('Historie chotěbořského skautingu', 'skaut', 36);
 
 // Každé nové pexeso přidej do pole pexesoDecks.
-const pexesoDecks = [harryPotterPexeso, lordOfTheRings, strangerThings];
+const pexesoDecks = [skaut, harryPotterPexeso, lordOfTheRings, strangerThings];
 
 
 function initiatePexeso(pexesoDeck) {
